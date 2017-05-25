@@ -9,34 +9,34 @@ import urllib.parse
 import urllib.request
 import http.cookiejar
 
-# Ê×ÏÈ¶¨ÒåÏÂ±ß¿ÉÄÜĞèÒªµÄ±äÁ¿
+# é¦–å…ˆå®šä¹‰ä¸‹è¾¹å¯èƒ½éœ€è¦çš„å˜é‡
 url = "https://www.baidu.com"
 headers = {"User-Agent": "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)"}
 
-# ×î¼òµ¥µÄÍøÒ³×¥È¡·½Ê½
+# æœ€ç®€å•çš„ç½‘é¡µæŠ“å–æ–¹å¼
 response = urllib.request.urlopen(url, timeout=10)
 html = response.read().decode("utf-8")
 
 
-# Ê¹ÓÃRequestÊµÀı´úÌæurl
+# ä½¿ç”¨Requestå®ä¾‹ä»£æ›¿url
 request = urllib.request.Request(url, data=None, headers={})
 response = urllib.request.urlopen(request, timeout=10)
 
 
-# ·¢ËÍÊı¾İ£¬¼´ÔÚRequest()ÖĞÌí¼Ódata²ÎÊı
+# å‘é€æ•°æ®ï¼Œå³åœ¨Request()ä¸­æ·»åŠ dataå‚æ•°
 data = urllib.parse.urlencode({"act": "login", "email": "xianhu@qq.com", "password": "123456"})
-request1 = urllib.request.Request(url, data=data)           # POST·½·¨
-request2 = urllib.request.Request(url+"?%s" % data)         # GET·½·¨
+request1 = urllib.request.Request(url, data=data)           # POSTæ–¹æ³•
+request2 = urllib.request.Request(url+"?%s" % data)         # GETæ–¹æ³•
 response = urllib.request.urlopen(request, timeout=10)
 
 
-# ·¢ËÍHeader£¬¼´ÔÚRequest()ÖĞÌí¼Óheaders²ÎÊı
-request = urllib.request.Request(url, data=data, headers=headers)   # ²ÎÊıÖĞÌí¼Óheader²ÎÊı
-request.add_header("Referer", "http://www.baidu.com")               # ÁíÒ»ÖÖÌí¼ÓheaderµÄ·½Ê½,Ìí¼ÓRefererÊÇÎªÁËÓ¦¶Ô"·´µÁÁ´"
+# å‘é€Headerï¼Œå³åœ¨Request()ä¸­æ·»åŠ headerså‚æ•°
+request = urllib.request.Request(url, data=data, headers=headers)   # å‚æ•°ä¸­æ·»åŠ headerå‚æ•°
+request.add_header("Referer", "http://www.baidu.com")               # å¦ä¸€ç§æ·»åŠ headerçš„æ–¹å¼,æ·»åŠ Refereræ˜¯ä¸ºäº†åº”å¯¹"åç›—é“¾"
 response = urllib.request.urlopen(request, timeout=10)
 
 
-# ÍøÒ³×¥È¡Òı·¢Òì³££ºurllib.error.HTTPError, urllib.error.URLError, Á½Õß´æÔÚ¼Ì³Ğ¹ØÏµ
+# ç½‘é¡µæŠ“å–å¼•å‘å¼‚å¸¸ï¼šurllib.error.HTTPError, urllib.error.URLError, ä¸¤è€…å­˜åœ¨ç»§æ‰¿å…³ç³»
 try:
     urllib.request.urlopen(request, timeout=10)
 except urllib.error.HTTPError as e:
@@ -45,52 +45,52 @@ except urllib.error.URLError as e:
     print(e.errno, e.reason)
 
 
-# Ê¹ÓÃ´úÀí£¬ÒÔ·ÀÖ¹IP±»·â»òIP´ÎÊıÊÜÏŞ£º
+# ä½¿ç”¨ä»£ç†ï¼Œä»¥é˜²æ­¢IPè¢«å°æˆ–IPæ¬¡æ•°å—é™ï¼š
 proxy_handler = urllib.request.ProxyHandler(proxies={"http": "111.123.76.12:8080"})
 
-opener = urllib.request.build_opener(proxy_handler)     # ÀûÓÃ´úÀí´´½¨openerÊµÀı
-response = opener.open(url)                             # Ö±½ÓÀûÓÃopenerÊµÀı´ò¿ªurl
+opener = urllib.request.build_opener(proxy_handler)     # åˆ©ç”¨ä»£ç†åˆ›å»ºopenerå®ä¾‹
+response = opener.open(url)                             # ç›´æ¥åˆ©ç”¨openerå®ä¾‹æ‰“å¼€url
 
-urllib.request.install_opener(opener)                   # °²×°È«¾Öopener£¬È»ºóÀûÓÃurlopen´ò¿ªurl
+urllib.request.install_opener(opener)                   # å®‰è£…å…¨å±€openerï¼Œç„¶ååˆ©ç”¨urlopenæ‰“å¼€url
 response = urllib.request.urlopen(url)
 
 
-# Ê¹ÓÃcookieºÍcookiejar,Ó¦¶Ô·şÎñÆ÷¼ì²é
+# ä½¿ç”¨cookieå’Œcookiejar,åº”å¯¹æœåŠ¡å™¨æ£€æŸ¥
 cookie_jar = http.cookiejar.CookieJar()
 cookie_jar_handler = urllib.request.HTTPCookieProcessor(cookiejar=cookie_jar)
 opener = urllib.request.build_opener(cookie_jar_handler)
 response = opener.open(url)
 
 
-# ·¢ËÍÔÚä¯ÀÀÆ÷ÖĞ»ñÈ¡µÄcookie,Á½ÖÖ·½Ê½:
-# (1)Ö±½Ó·Åµ½headersÀï
+# å‘é€åœ¨æµè§ˆå™¨ä¸­è·å–çš„cookie,ä¸¤ç§æ–¹å¼:
+# (1)ç›´æ¥æ”¾åˆ°headersé‡Œ
 headers = {
     "User-Agent": "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)",
     "Cookie": "PHPSESSID=btqkg9amjrtoeev8coq0m78396; USERINFO=n6nxTHTY%2BJA39z6CpNB4eKN8f0KsYLjAQTwPe%2BhLHLruEbjaeh4ulhWAS5RysUM%2B; "
 }
 request = urllib.request.Request(url, headers=headers)
 
-# (2)¹¹½¨cookie,Ìí¼Óµ½cookiejarÖĞ
+# (2)æ„å»ºcookie,æ·»åŠ åˆ°cookiejarä¸­
 cookie = http.cookiejar.Cookie(name="xx", value="xx", domain="xx", ...)
 cookie_jar.set_cookie(cookie)
 response = opener.open(url)
 
 
-# Í¬Ê±Ê¹ÓÃ´úÀíºÍcookiejar
+# åŒæ—¶ä½¿ç”¨ä»£ç†å’Œcookiejar
 opener = urllib.request.build_opener(cookie_jar_handler)
 opener.add_handler(proxy_handler)
 response = opener.open("https://www.baidu.com/")
 
 
-# ×¥È¡ÍøÒ³ÖĞµÄÍ¼Æ¬£ºÍ¬ÑùÊÊÓÃÓÚ×¥È¡ÍøÂçÉÏµÄÎÄ¼ş¡£ÓÒ»÷Êó±ê£¬ÕÒµ½Í¼Æ¬ÊôĞÔÖĞµÄµØÖ·£¬È»ºó½øĞĞ±£´æ¡£
+# æŠ“å–ç½‘é¡µä¸­çš„å›¾ç‰‡ï¼šåŒæ ·é€‚ç”¨äºæŠ“å–ç½‘ç»œä¸Šçš„æ–‡ä»¶ã€‚å³å‡»é¼ æ ‡ï¼Œæ‰¾åˆ°å›¾ç‰‡å±æ€§ä¸­çš„åœ°å€ï¼Œç„¶åè¿›è¡Œä¿å­˜ã€‚
 response = urllib.request.urlopen("http://ww3.sinaimg.cn/large/7d742c99tw1ee7dac2766j204q04qmxq.jpg", timeout=120)
 with open("test.jpg", "wb") as file_img:
     file_img.write(response.read())
 
 
-# HTTPÈÏÖ¤£º¼´HTTPÉí·İÑéÖ¤
-password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()     # ´´½¨Ò»¸öPasswordMgr
-password_mgr.add_password(realm=None, uri=url, user='username', passwd='password')   # Ìí¼ÓÓÃ»§ÃûºÍÃÜÂë
-handler = urllib.request.HTTPBasicAuthHandler(password_mgr)         # ´´½¨HTTPBasicAuthHandler
-opener = urllib.request.build_opener(handler)                       # ´´½¨opner
-response = opener.open(url, timeout=10)                             # »ñÈ¡Êı¾İ
+# HTTPè®¤è¯ï¼šå³HTTPèº«ä»½éªŒè¯
+password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()     # åˆ›å»ºä¸€ä¸ªPasswordMgr
+password_mgr.add_password(realm=None, uri=url, user='username', passwd='password')   # æ·»åŠ ç”¨æˆ·åå’Œå¯†ç 
+handler = urllib.request.HTTPBasicAuthHandler(password_mgr)         # åˆ›å»ºHTTPBasicAuthHandler
+opener = urllib.request.build_opener(handler)                       # åˆ›å»ºopner
+response = opener.open(url, timeout=10)                             # è·å–æ•°æ®

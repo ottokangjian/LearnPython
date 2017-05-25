@@ -9,7 +9,6 @@ guess_int = int(guess)
 
 while guess_int != secret:
 
-
 	if guess_int == secret:
 		print ("Bingo!")
 	else:
@@ -21,5 +20,5 @@ while guess_int != secret:
 	guess = input("input a number pls")
 	guess_int = int(guess)
 
-			
+print ("Bingo!")	
 print ("Bye!")

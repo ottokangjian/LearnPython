@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>resolutionData</key>
+	<dict>
+		<key>sheetClusters</key>
+		<dict>
+			<key>2017-05-29-url.py.md</key>
+			<dict>
+				<key>explicitUnassignment</key>
+				<true/>
+				<key>firstUnassignment</key>
+				<real>517728625.97864902</real>
+				<key>lastModification</key>
+				<real>517728625.97864902</real>
+				<key>version</key>
+				<dict>
+					<key>245e1d992163fbdbb49fc706f5b1cc63256b3c86523826f0bf0427994b036e6f</key>
+					<integer>3</integer>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>sheetClusters</key>
+	<array>
+		<array>
+			<string>2017-05-29-url.py.md</string>
+		</array>
+	</array>
+	<key>storeFormatVersion</key>
+	<integer>1</integer>
+	<key>versioning</key>
+	<dict>
+		<key>sheetClusters</key>
+		<dict>
+			<key>245e1d992163fbdbb49fc706f5b1cc63256b3c86523826f0bf0427994b036e6f</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>
